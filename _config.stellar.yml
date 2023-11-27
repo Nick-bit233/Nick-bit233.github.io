@@ -23,6 +23,52 @@ search:
     content: true # 是否搜索内容
     codeblock: true # 是否搜索代码块（需要content: true)
 
+######## Page Style ########
+style:
+  darkmode: auto # auto / always / false
+  smooth_scroll: true # true / false
+  font-size:
+    root: 16px
+    body: .9375rem # 15px
+    code: 85% # 14px
+    codeblock: 0.8125rem # 13px
+  font-family:
+    logo: 'system-ui, "Microsoft Yahei", "Segoe UI", -apple-system, Roboto, Ubuntu, "Helvetica Neue", Arial, "WenQuanYi Micro Hei", sans-serif'
+    body: 'system-ui, "Microsoft Yahei", "Segoe UI", -apple-system, Roboto, Ubuntu, "Helvetica Neue", Arial, "WenQuanYi Micro Hei", sans-serif'
+    code: 'Menlo, Monaco, Consolas, system-ui, "Courier New", monospace, sans-serif'
+    codeblock: 'Menlo, Monaco, Consolas, system-ui, "Courier New", monospace, sans-serif'
+  text-align: left
+  border-radius:
+    card: 12px
+    block: 12px
+    bar: 6px
+    image: 6px
+  color:
+    # 动态颜色（会根据明暗主题重设明度值，只用关心色相和饱和度即可）
+    background: 'hsl(168 16% 98%)' # 浅色背景颜色
+    block: 'hsl(168 8% 95%)' # 块背景颜色
+    code: 'hsl(14 100% 48%)' # 行内代码颜色
+    text: 'hsl(0 0% 20%)' # 文本颜色
+    # 主题色配置（不会根据明暗动态调整，请设置为通用的颜色）
+    theme: 'hsl(192 98% 55%)' # 主题色
+    accent: 'hsl(14 100% 57%)' # 强调色
+    link: 'hsl(207 90% 54%)' # 超链接颜色
+    button: 'hsl(192 98% 55%)' # 按钮颜色
+    hover: 'hsl(14 100% 57%)' # 按钮高亮颜色
+  link:
+    underline: true # true / false
+  animated_avatar:
+    animate: auto # auto, always
+    background: https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp
+  codeblock:
+    scrollbar: 4px
+    highlightjs_theme: https://gcore.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/atom-one-dark.min.css
+  loading:
+    loading: 正在加载
+    error: 加载失败，请稍后重试。
+  gradient: # https://webgradients.com/
+    start: 'linear-gradient(to right, hsl(215, 95%, 64%), hsl(195, 95%, 60%), hsl(165, 95%, 56%), hsl(165, 95%, 56%), hsl(195 95% 60%), hsl(215, 95%, 64%))'
+    search: 'linear-gradient(to right, #04F3FF, #08FFC6, #DDF730, #FFBD19, #FF1FE0, #C418FF, #04F3FF)'
 
 # 注意：要使用katex数学公式渲染插件，请在新安装Hexo环境时，重装渲染器包
 # 具体步骤：
