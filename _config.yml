@@ -4,7 +4,7 @@
 
 # Site
 title: Nickbit's Blog
-subtitle: Yes, this is subtitle
+subtitle:  Yes, this is a subtitle | 没错，这就是副标题
 description: ''
 keywords: 
 author: Nickbit aka. Sciencstine
@@ -97,7 +97,42 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: stellar
+
+# # Config For hexo-renderer-markdown-it
+# markdown:
+#   preset: 'default'
+#   render:
+#     html: true
+#     xhtmlOut: true
+#     breaks: true
+#     langPrefix: 'language-'
+#     linkify: true
+#     typographer: true
+#     quotes: '“”‘’'
+#   plugins:
+#     - 'markdown-it-footnote'
+#     - 'markdown-it-ins'
+#     - 'markdown-it-mark'
+#     - 'markdown-it-sub'
+#     - 'markdown-it-sup'
+#     # Config For markdown-it-katex
+#     - plugin:
+#       name: '@traptitech/markdown-it-katex'
+#       options: # see https://katex.org/docs/options.html
+#         blockClass: "math-block"
+#         strict: false
+#         throwOnError: false
+#         errorColor: "#cc0000"
+#     # Config For markdown-it-multimd-table (not installed yet)
+# #   - plugin:
+# #     name: markdown-it-multimd-table
+# #     enable: true
+# #     options:
+# #       multiline: true
+# #       rowspan: true
+# #       headerless: true
+
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
