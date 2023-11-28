@@ -23,12 +23,12 @@
   <title>【笔记】生成模型基础与应用 - 第3章 - Nickbit's Blog</title>
 
   
-    <meta name="description" content="C3 主题模型 Topic models：以非监督学习的方式对文本的隐含结构进行发现或生成的模型  主题模型是一类用于文本分析的非监督学习方法，旨在从文本数据中发现隐藏的主题结构。这些主题模型的目标是识别文本集合中的主题，而无需事先标记的主题标签或监督信息。主题模型最常见的应用之一是用于文本数据的主题建模，其中文档被看作是多个主题的混合，而每个主题又由一组词汇表示。  主题模型的发展：  LS">
+    <meta name="description" content="C3 主题模型：主题模型是一类用于文本分析的非监督学习方法，旨在从文本数据中发现隐藏的主题结构…">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【笔记】生成模型基础与应用 - 第3章">
 <meta property="og:url" content="https://nick-bit233.github.io/2023/11/27/%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80%E4%B8%8E%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0-%E7%AC%AC3%E7%AB%A0/index.html">
 <meta property="og:site_name" content="Nickbit&#39;s Blog">
-<meta property="og:description" content="C3 主题模型 Topic models：以非监督学习的方式对文本的隐含结构进行发现或生成的模型  主题模型是一类用于文本分析的非监督学习方法，旨在从文本数据中发现隐藏的主题结构。这些主题模型的目标是识别文本集合中的主题，而无需事先标记的主题标签或监督信息。主题模型最常见的应用之一是用于文本数据的主题建模，其中文档被看作是多个主题的混合，而每个主题又由一组词汇表示。  主题模型的发展：  LS">
+<meta property="og:description" content="C3 主题模型：主题模型是一类用于文本分析的非监督学习方法，旨在从文本数据中发现隐藏的主题结构…">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/23169257/1698137498203-3dbd1471-0a04-4382-86fe-747431990568.png#averageHue=%23eeeeee&clientId=u282752da-b69c-4&from=paste&height=315&id=ubdb7149f&originHeight=520&originWidth=664&originalType=binary&ratio=1.6500000953674316&rotation=0&showTitle=false&size=259496&status=done&style=none&taskId=ucf91a161-b004-4f5c-8a72-5af695055ce&title=&width=402.424219164749">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/23169257/1698739378431-1588de4b-e0fa-4b92-9e93-41b00069028f.png#averageHue=%23ececec&clientId=ufc18b360-4daa-4&from=paste&height=170&id=u3e28fee4&originHeight=281&originWidth=320&originalType=binary&ratio=1.6500000953674316&rotation=0&showTitle=false&size=51310&status=done&style=none&taskId=uc6222b97-991a-41af-878d-f7b93bcd9c6&title=&width=193.9393827299995">
@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/23169257/1698750789928-c298eb01-d66f-471a-840f-2183e3d3a47f.png#averageHue=%23f4f4f4&clientId=ufc18b360-4daa-4&from=paste&height=213&id=u0516f1b1&originHeight=337&originWidth=991&originalType=binary&ratio=1.6500000953674316&rotation=0&showTitle=false&size=129949&status=done&style=none&taskId=u841c8c1f-ec74-4b8d-b42d-df062035910&title=&width=625.6666870117188">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2023/png/23169257/1698750921909-2787ed65-349d-49ec-8a6a-c9a1e094e64b.png#averageHue=%23dad0b6&clientId=ufc18b360-4daa-4&from=paste&height=268&id=ue371411a&originHeight=402&originWidth=1069&originalType=binary&ratio=1.6500000953674316&rotation=0&showTitle=false&size=510704&status=done&style=none&taskId=ud6edc293-0798-4848-a12b-a3ae3f36ec1&title=&width=712.6666666666666">
 <meta property="article:published_time" content="2023-11-27T06:54:53.000Z">
-<meta property="article:modified_time" content="2023-11-27T07:36:20.352Z">
+<meta property="article:modified_time" content="2023-11-27T12:52:47.018Z">
 <meta property="article:author" content="Nickbit aka. Sciencstine">
 <meta property="article:tag" content="生成模型">
 <meta property="article:tag" content="笔记">
@@ -89,7 +89,7 @@
 
 <header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Nickbit's Blog</div><div class="sub normal cap">Yes, this is a subtitle</div><div class="sub hover cap" style="opacity:0"> 没错，这就是副标题</div></a></div>
 
-<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a></nav>
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/friends/">友链</a><a class="nav-item" href="/about/">关于</a></nav>
 </header>
 
 
@@ -118,6 +118,8 @@
 <article class='md-text content post'>
 <h1 class="article-title"><span>【笔记】生成模型基础与应用 - 第3章</span></h1>
 <meta name="referrer" content="no-referrer" />
+<p>C3 主题模型：主题模型是一类用于文本分析的非监督学习方法，旨在从文本数据中发现隐藏的主题结构…</p>
+<span id="more"></span>
 <h2 id="c3-主题模型"><a class="markdownIt-Anchor" href="#c3-主题模型"></a> C3 主题模型</h2>
 <p><strong>Topic models</strong>：以非监督学习的方式对文本的隐含结构进行发现或生成的模型</p>
 <blockquote>
@@ -402,6 +404,18 @@ D(xx场景下如何看待xx和xx的关系) = {教育：0.5，经济：0.3，交�
 
 
 
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body waline'>
+      
+
+<div id="waline_container" class="waline_thread"><svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg></div>
+
+    </section>
+  </div>
+
 
 
       
@@ -576,6 +590,31 @@ D(xx场景下如何看待xx和xx的关系) = {教育：0.5，经济：0.3，交�
 
 
 <!-- optional -->
+
+  <script>
+  function load_comment(){
+    if(!document.getElementById("waline_container"))return;
+    stellar.loadCSS('https://unpkg.com/@waline/client@2.14.1/dist/waline.css');
+    stellar.loadScript('https://unpkg.com/@waline/client@2.14.1/dist/waline.js', {defer:true}).then(function () {
+      const el = document.getElementById("waline_container");
+      var path = el.getAttribute('comment_id');
+      if (!path) {
+        path = decodeURI(window.location.pathname);
+      }
+      Waline.init(Object.assign({"js":"https://unpkg.com/@waline/client@2.14.1/dist/waline.js","css":"https://unpkg.com/@waline/client@2.14.1/dist/waline.css","serverURL":"http://74.226.240.140:8360/","commentCount":true,"pageview":true,"emoji":["https://unpkg.com/@waline/emojis@1.1.0/bilibili"]}, {
+        el: '#waline_container',
+        path: path,
+        
+      }));
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');
+    load_comment();
+  });
+
+</script>
+
 
 
 
