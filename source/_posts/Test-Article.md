@@ -4,6 +4,10 @@ date: 2023-10-28 21:08:10
 tags:
 ---
 
+Hello world!
+
+<!-- more -->
+
 # Hi there!
 
 如果你看到这个，说明这个博客框架似乎运行正常。
@@ -129,17 +133,24 @@ BT夏季版banner
 
 要现在`source/_data/links.yml`中加入链接的静态数据：
 ```yaml
-'链接名称':
+'链接组名称':
     - title: 某某某
       url: https://
       screenshot:
       avatar:
       description:
+    - title: 某某某2
+      url: https://
+      screenshot:
+      avatar:
+      description:
+    ...
 ```
 然后这样写：
 ```markdown
-{% friends 链接名称 %}
+{% friends 链接组名称 %}
 ```
+一个链接组可以有多个链接，它们会自适应排布到页面。
 
 ### 网站卡片链接
 
@@ -149,9 +160,7 @@ BT夏季版banner
 {% sites 分组名 %}
 ```
 
-{% sites 616sb %}
-{% sites bestdori %}
-
+{% sites mug_sites %}
 
 ### github card卡片
 
@@ -217,3 +226,13 @@ print("hello world")
 ![](https://images.unsplash.com/photo-1542272201-b1ca555f8505?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80)
 ![](https://images.unsplash.com/photo-1524797905120-92940d3a18d6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80)
 {% endswiper %}
+
+
+- 添加参考引用列表，效果如下：
+---
+references:
+  - title: '使用 Stellar 主题的博客'
+    url: https://xaoxuu.com/wiki/stellar/examples/
+  - title: 'Hexo Stellar 和 Next 主题支持 KaTex 公式与 Markdown 复杂表格'
+    url: https://www.panoshu.top/blog/2c3f9e38/
+---

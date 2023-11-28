@@ -5,6 +5,10 @@ year: 2021
 tags: [java, Spring]
 ---
 
+关于如何使用Spring和JPA的入门教程
+
+<!-- more -->
+
 > 注意：该文档最初创建于Sep 19, 2021，可能存在已过时的内容，仅供参考
 
 ## 建立Spring项目

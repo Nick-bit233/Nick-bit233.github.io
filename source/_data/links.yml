@@ -1,16 +1,33 @@
-'616sb':
-  - title: Konmai Academy
+'geeks_friend_links':
+  - title: Ridd
+    url: https://blog.riddma.comW
+    screenshot:
+    avatar: /assets/icons/icon_ridd_ma.jpg
+    description: Ridd's Blog
+  - title: NOAM CHI
+    url: https://jnn.icu
+    screenshot:
+    avatar: /assets/icons/icon_jnn.png
+    description: Noam's Blog
+
+'artists_friend_links':
+  - title: Waldo Yang
+    url: https://indicator0.github.io
+    screenshot:
+    avatar: /assets/icons/icon_waldo.png
+    description: Waldo Yang's Photography
+
+'mug_sites':
+  - title: 616.sb
     url: https://616.sb/
     screenshot:
     avatar: 
     description: 纯净的音游下载站
-'bemaniCN':
   - title: BEMANICN
     url: https://bemani.cc/categories
     screenshot:
     avatar: 
     description: BEMANICN 论坛
-'bestdori':
   - title: Bestdori
     url: https://bestdori.com/community/home
     screenshot:
