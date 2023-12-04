@@ -33,3 +33,85 @@
     screenshot:
     avatar: 
     description: BanG Dream! 资源库和社区
+
+'personal_portfolio':
+  - title: Link-Up Hero
+    url: https://nick-bit233.itch.io/linkup-hero/
+    screenshot:
+    avatar: 
+    description: 一个基于连连看+DBG Rougelike的Demo游戏
+  - title: Dreaming Butterfly《如梦之梦》
+    url: https://www.bilibili.com/video/BV1Bg41157AM
+    screenshot:
+    avatar: 
+    description: 水彩漫画2/3D视觉解谜游戏，2021网易雷火MiniGame夏令营 第一名
+    
+  - title: Puzzle maze
+    url: https://distractionware.com/forum/index.php?topic=2095.0
+    screenshot:
+    avatar: 
+    description: 一个独立游戏《VVVVVV》的自制关卡
+
+'bookmarks_tools':
+  - title: Complier Explorer
+    url: https://godbolt.org/
+    screenshot:
+    avatar: 
+    description: 在线编译器
+  - title: Vocal Remover
+    url: https://vocalremover.org/zh/
+    screenshot:
+    avatar: 
+    description: AI人声音轨分离
+  - title: 图片背景消除
+    url: https://www.remove.bg/zh
+    screenshot:
+    avatar: 
+    description: 在线抠图，去除背景
+  - title: B站封面提取
+    url: https://www.galmoe.com/
+    screenshot:
+    avatar: 
+    description: 抓取B站视频的封面
+  - title: Wolfram Alpha
+    url: https://www.wolframalpha.com/
+    screenshot:
+    avatar: 
+    description: 数学求解器和科学问题搜索
+  - title: Latex Live
+    url: https://www.latexlive.com/
+    screenshot:
+    avatar: 
+    description: 在线Latex编辑和图像生成器
+  - title: Tiki-Toki
+    url: https://www.tiki-toki.com/
+    screenshot:
+    avatar: 
+    description: 时间轴展示生成
+
+'bookmarks_resources':
+  - title: Pexels
+    url: https://www.pexels.com/zh-cn/
+    screenshot:
+    avatar: 
+    description: 免费摄影图片素材
+  - title: Panzoid
+    url: https://panzoid.com/
+    screenshot:
+    avatar: 
+    description: 免费的片头展示视频模板和生成器
+  - title: 清华Tuna镜像站
+    url: https://mirrors.tuna.tsinghua.edu.cn/
+    screenshot:
+    avatar: 
+    description: 开源软件镜像
+  - title: Audio Library
+    url: https://www.audiolibrary.com.co/
+    screenshot:
+    avatar: 
+    description: 免费无版权音乐
+  - title: Story Blocks
+    url: https://www.storyblocks.com/audio
+    screenshot:
+    avatar: 
+    description: 免费音效下载
