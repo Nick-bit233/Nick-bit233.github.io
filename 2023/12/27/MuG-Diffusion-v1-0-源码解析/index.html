@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 7.0.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>MuG Diffusion v1.0 源码解析 - Nickbit's Blog</title>
+
+  
+    <meta name="description" content="警告，包含大量GPT4分析和代写内容，可能存在谬误 原仓库地址：https:&#x2F;&#x2F;github.com&#x2F;Keytoyze&#x2F;Mug-Diffusion   （1）数据集准备部分 数据准备过程概况如下：  把下载好的数据集（osu谱面）放在data&#x2F;文件夹下，可以准备一个子文件夹 数据集文件夹下新建一个beatmap.txt，记录谱面元数据，用于下一步 按照configs&#x2F;mug&#x2F;mania_beat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MuG Diffusion v1.0 源码解析">
+<meta property="og:url" content="https://nick-bit233.github.io/2023/12/27/MuG-Diffusion-v1-0-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="Nickbit&#39;s Blog">
+<meta property="og:description" content="警告，包含大量GPT4分析和代写内容，可能存在谬误 原仓库地址：https:&#x2F;&#x2F;github.com&#x2F;Keytoyze&#x2F;Mug-Diffusion   （1）数据集准备部分 数据准备过程概况如下：  把下载好的数据集（osu谱面）放在data&#x2F;文件夹下，可以准备一个子文件夹 数据集文件夹下新建一个beatmap.txt，记录谱面元数据，用于下一步 按照configs&#x2F;mug&#x2F;mania_beat">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/2/28/Autoencoder_structure.png">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-1a60fadfd1b8cb1b41bad5f7deddf526_r.jpg">
+<meta property="article:published_time" content="2023-12-27T15:32:33.000Z">
+<meta property="article:modified_time" content="2023-12-27T15:34:57.852Z">
+<meta property="article:author" content="Nickbit aka. Sciencstine">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/2/28/Autoencoder_structure.png">
+  
+  
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
+    <script defer src="https://gcore.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"onload="renderMathInElement(document.body);"></script>
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Nickbit's Blog</div><div class="sub normal cap">Yes, this is a subtitle</div><div class="sub hover cap" style="opacity:0"> 没错，这就是副标题</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/notes/">笔记</a><a class="nav-item" href="/friends/">友链</a><a class="nav-item" href="/about/">关于</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">MuG Diffusion v1.0 源码解析</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E6%95%B0%E6%8D%AE%E9%9B%86%E5%87%86%E5%A4%87%E9%83%A8%E5%88%86"><span class="toc-text"> （1）数据集准备部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mugdata"><span class="toc-text"> [mug&#x2F;data]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scripts"><span class="toc-text"> [scripts]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E9%85%8D%E7%BD%AE"><span class="toc-text"> 数据集配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2vae%E7%BC%96%E8%A7%A3%E7%A0%81%E9%83%A8%E5%88%86"><span class="toc-text"> （2）VAE编解码部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mugfirststage"><span class="toc-text"> [mug&#x2F;firststage]</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3diffusion%E8%AE%AD%E7%BB%83%E9%83%A8%E5%88%86"><span class="toc-text"> （3）Diffusion训练部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%B5%8C%E5%85%A5%E6%A8%A1%E5%9E%8B-mugcond"><span class="toc-text"> 条件嵌入模型 [mug&#x2F;cond]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#feature_condpy-beatmapfeatureembedder-%E8%B0%B1%E9%9D%A2%E7%89%B9%E5%BE%81%E6%8F%90%E7%A4%BA%E5%B5%8C%E5%85%A5"><span class="toc-text"> feature_cond.py - BeatmapFeatureEmbedder 谱面特征（提示）嵌入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#wavepy"><span class="toc-text"> wave.py - 音频数据嵌入</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ldmddpm%E6%A8%A1%E5%9E%8B-mugdiffusion"><span class="toc-text"> LDM&#x2F;DDPM模型 - [mug&#x2F;diffusion]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#diffusionpy"><span class="toc-text"> diffusion.py - DDPM模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#unetpy"><span class="toc-text"> unet.py - U-Net模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ddimpy"><span class="toc-text"> ddim.py - DDIM模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E5%85%A5%E5%8F%A3mainpy"><span class="toc-text"> 训练入口[main.py]</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4webui%E5%92%8C%E6%8E%A8%E7%90%86%E9%83%A8%E5%88%86"><span class="toc-text"> （4）WebUI和推理部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92%E5%BC%8F%E6%8E%A8%E7%90%86%E5%85%A5%E5%8F%A3webuipy"><span class="toc-text"> 交互式推理入口[webui.py]</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-12-27T15:32:33.000Z">2023-12-27</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>MuG Diffusion v1.0 源码解析</span></h1>
+<blockquote>
+<p>警告，包含大量GPT4分析和代写内容，可能存在谬误<br />
+原仓库地址：<a target="_blank" rel="noopener" href="https://github.com/Keytoyze/Mug-Diffusion">https://github.com/Keytoyze/Mug-Diffusion</a></p>
+</blockquote>
+<h2 id="1数据集准备部分"><a class="markdownIt-Anchor" href="#1数据集准备部分"></a> （1）数据集准备部分</h2>
+<p>数据准备过程概况如下：</p>
+<ul>
+<li>把下载好的数据集（osu谱面）放在<code>data/</code>文件夹下，可以准备一个子文件夹</li>
+<li>数据集文件夹下新建一个beatmap.txt，记录谱面元数据，用于下一步</li>
+<li>按照configs/mug/mania_beatmap_features.yaml中的配置，抽取谱面的特征</li>
+<li>谱面特征需要转化为数据表，存放与beatmap.txt同一目录下的features.db数据库中</li>
+<li>至少准备两个这样的数据集：一个训练集一个验证集</li>
+</ul>
+<h3 id="mugdata"><a class="markdownIt-Anchor" href="#mugdata"></a> [mug/data]</h3>
+<p>mug/data/convertor.py: 工具类，用来解析单个.osu谱面文件<br />
+mug/data/dataset.py: 构建用于pytorch训练的数据集格式，在此之前，请确保已经抽取了谱面特征，并存放在features.db中<br />
+mug/data/utils.py: （待分析）一些用于对齐的工具函数</p>
+<p>准备好的数据集条目示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;meta&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;path&quot;</span>: <span class="string">&quot;data/beatmap_4k/1469980 Silentroom vs. Frums - Aegleseeker/Silentroom vs. Frums - Aegleseeker ([Crz]Alleyne) [The Last Observation].osu&quot;</span>, </span><br><span class="line">    <span class="string">&quot;audio&quot;</span>: <span class="string">&quot;data/beatmap_4k/1469980 Silentroom vs. Frums - Aegleseeker/audio.ogg&quot;</span>, </span><br><span class="line">    <span class="string">&quot;game_mode&quot;</span>: <span class="number">3</span>, <span class="string">&quot;cs&quot;</span>: <span class="number">4.0</span>, <span class="string">&quot;version&quot;</span>: <span class="string">&quot;The Last Observation&quot;</span>, <span class="string">&quot;set_id&quot;</span>: <span class="number">1469980</span></span><br><span class="line">  &#125;, </span><br><span class="line">  <span class="string">&quot;convertor&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;frame_ms&quot;</span>: <span class="number">46.439909297052154</span>, <span class="string">&quot;max_frame&quot;</span>: <span class="number">4096</span>, <span class="string">&quot;mirror&quot;</span>: <span class="literal">False</span>, <span class="string">&quot;random&quot;</span>: <span class="literal">False</span>, <span class="string">&quot;mirror_at_interval_prob&quot;</span>: <span class="number">0</span>, <span class="string">&quot;offset_ms&quot;</span>: <span class="number">0</span>, <span class="string">&quot;rate&quot;</span>: <span class="number">1.0</span></span><br><span class="line">  &#125;, </span><br><span class="line">  <span class="string">&quot;note&quot;</span>: array([[<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       ...,</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>]], dtype=float32), </span><br><span class="line">  <span class="string">&#x27;valid_flag&#x27;</span>: array([<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>]), </span><br><span class="line">  <span class="string">&#x27;audio&#x27;</span>: array([[<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       ...,</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">       [<span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>, ..., <span class="number">0.</span>, <span class="number">0.</span>, <span class="number">0.</span>]], dtype=float32), </span><br><span class="line">  <span class="string">&#x27;feature&#x27;</span>: array([ <span class="number">24</span>,  <span class="number">39</span>,  <span class="number">41</span>,  <span class="number">53</span>,  <span class="number">55</span>,  <span class="number">58</span>,  <span class="number">81</span>, <span class="number">110</span>, <span class="number">124</span>, <span class="number">142</span>, <span class="number">157</span>, <span class="number">179</span>, <span class="number">192</span>,</span><br><span class="line">       <span class="number">212</span>, <span class="number">225</span>, <span class="number">237</span>, <span class="number">259</span>, <span class="number">275</span>, <span class="number">293</span>, <span class="number">314</span>, <span class="number">327</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>note：谱面音符的数据（文本 -&gt; 向量）</li>
+<li>feature：谱面特征的数据，osu元数据和ett分数等 （文本 -&gt; 向量）</li>
+<li>audio：音频的张量数据 （有一个问题是，模型是怎么处理长度不同的音频的？）</li>
+<li>valid_flag：<code>？一个标记向量，用于标记谱面中的音符是否有效，即是否在音频中有对应的音符？</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据集中各张量的shape</span></span><br><span class="line">[<span class="string">&#x27;note&#x27;</span>].shape: (<span class="number">16</span>, <span class="number">4096</span>)</span><br><span class="line">[<span class="string">&#x27;audio&#x27;</span>].shape: (<span class="number">128</span>, <span class="number">32768</span>)</span><br><span class="line">[<span class="string">&#x27;feature&#x27;</span>].shape: (<span class="number">21</span>,)</span><br><span class="line">[<span class="string">&#x27;valid flag&#x27;</span>].shape: (<span class="number">4096</span>,)</span><br></pre></td></tr></table></figure>
+<p>处理音频的缓存<code>.npz</code>文件放置于<code>data/audio_cache</code>文件夹中。</p>
+<h3 id="scripts"><a class="markdownIt-Anchor" href="#scripts"></a> [scripts]</h3>
+<ul>
+<li>如果我的判断没错，准备数据这个阶段时完全手动的，看到这个文件夹下的脚本都没有被引用过……</li>
+</ul>
+<p>scripts/prepare_beatmap.py: 用本地下载的osu谱面于制作beatmap.txt，给定输入输出文件夹<br />
+scripts/prepare_ranked_beatmap.py: 从osu网站上爬取谱面，制作beatmap.txt，需要用到kuit自己的网站服务<br />
+scripts/prepare_beatmap_from_ranking_mapper.py: 同上，不过似乎是从特定的谱师id中获取</p>
+<p>scripts/prepare_beatmap_features.py: 从beatmap.txt中读取谱面元数据，抽取谱面特征，并提交到features.db中<br />
+抽取特征需要以下参数：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">beat<span class="emphasis">_map_</span>path = beatmap.txt 文件的路径，记得铺面文件的存放位置与该txt位于同一目录</span><br><span class="line">features<span class="emphasis">_yaml = 配置feature文件的路径，如&quot;configs/mug/mania_</span>beatmap<span class="emphasis">_features.yaml&quot;</span></span><br><span class="line"><span class="emphasis">osu_</span>tools = 一个osu官方开源的计算osu谱面信息的工具，在这里下载：https://github.com/ppy/osu-tools/tree/master/PerformanceCalculator</span><br><span class="line">获得源码后，需要使用dotnet编译（参见仓库readme），</span><br><span class="line">编译完成后，在\PerformanceCalculator\bin\Debug\net6.0\下可以找到PerformanceCalculator.dll文件，使用该文件的路径作为参数</span><br><span class="line">ranked<span class="emphasis">_map_</span>path = 存储每个谱面的rank（谱面审核）信息，该信息需要通过预处理获取，如果没有，可以指定为None</span><br><span class="line">dotnet<span class="emphasis">_path = 为了运行PerformanceCalculator.dll，需要安装.NET6.0，安装并设置完成环境变量后，可直接使用填入&quot;dotnet&quot;</span></span><br></pre></td></tr></table></figure>
+<p>scripts/filter_beatmap.py: （待分析）似乎是用于过滤谱面中的变速<br />
+……<br />
+其他脚本似乎是用于处理Etterna谱面的，或者是一些用于算法测试的（破案了，是原来stable diffusion的一些测试代码），跳过这一部分</p>
+<h3 id="数据集配置"><a class="markdownIt-Anchor" href="#数据集配置"></a> 数据集配置</h3>
+<p>如果你要训练，必须准备基本的两个数据集文件夹：</p>
+<ul>
+<li><code>mug.data.dataset.OsuTrainDataset</code></li>
+<li><code>mug.data.dataset.OsuVaildDataset</code></li>
+</ul>
+<p>将数据集路径指定在训练用的配置文件中，目前的路径是<code>configs/mug/mug_diffusion.yaml</code>，<br />
+同时最好有一个<code>mug.data.dataset.OsuTestDataset</code>数据集，用于测试.</p>
+<p>训练数据集示例结构：</p>
+<blockquote>
+<p>TODO</p>
+</blockquote>
+<h2 id="2vae编解码部分"><a class="markdownIt-Anchor" href="#2vae编解码部分"></a> （2）VAE编解码部分</h2>
+<p>这部分的目的是为了得到两个模型：</p>
+<ul>
+<li>Encoder：将谱面信息编码为一个向量</li>
+<li>Decoder：将一个向量解码为谱面信息</li>
+</ul>
+<h3 id="mugfirststage"><a class="markdownIt-Anchor" href="#mugfirststage"></a> [mug/firststage]</h3>
+<p>这部分用于实现AutoEncoder，自动编码器是一种无监督学习的神经网络模型，主要用于学习输入数据的压缩表示</p>
+<p>AutoEncoder的结构如下：</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://upload.wikimedia.org/wikipedia/commons/2/28/Autoencoder_structure.png"/></div></div>
+<p>其中包含两个<code>torch.nn.Module</code>类的组件：编码器（Encoder）和解码器（Decoder）。编码器的作用是将输入数据压缩为一个低维度的表示，而解码器则将这个低维度的表示恢复为原始的高维度数据</p>
+<p>注意：mug/firststage/autoencoder.py中的部分模型使用的网络模块定义在mug/model/modules.py中</p>
+<p>Encoder模型结构：</p>
+<ul>
+<li>输入通道数C=16</li>
+<li>经过一个3*3的卷积层，输出中间通道数64</li>
+<li>经过一系列下采样操作：在每次下采样之前，先经过一个残差块，并让每两次下采样后，网络的通道数翻倍
+<ul>
+<li>即: 64 * [1,1,2,2,4,4]</li>
+</ul>
+</li>
+<li>下采样网络：可选 卷积 或 平均池化
+<ul>
+<li>卷积：3*3卷积层，stride=2</li>
+<li>平均池化：2*2平均池化层，stride=2</li>
+</ul>
+</li>
+<li>中间层：使用2个残差块，每个残差块包含两个3*3卷积层，通道数不变</li>
+<li>输出层：首先通过一个归一化层对数据进行归一化处理，然后通过一个3<em>3卷积层将数据的通道数转换为编码器的输出通道数，输出 目标输出通道数</em>2 的向量表示
+<ul>
+<li>如：目标输出通道数为32，则输出64维的向量表示</li>
+</ul>
+</li>
+</ul>
+<p>Decoder模型结构：</p>
+<p>与Encoder模型结构正好相反，先将输入向量卷积到中间层，然后再经过一系列上采样操作，最后经过归一化和一个3*3卷积层，输出目标输出通道数的向量表示</p>
+<p>损失函数：AutoEncoderKL类使用了两个损失函数，分别是重构损失和KL散度损失</p>
+<ul>
+<li>重构损失：在<code>mug/firststage/losses.py</code>中定义，计算重构的谱面数据与原始谱面数据的误差，包括多种误差计算方式</li>
+<li>KL损失：计算编码器输出的均值和方差与标准正态分布的KL散度
+<ul>
+<li>KL损失在加入总损失时，需要乘以一个权重系数<code>self.kl_weight</code>，默认为0（不考虑KL损失）</li>
+</ul>
+</li>
+</ul>
+<p>AutoEncoder模型的使用：</p>
+<blockquote>
+<p>参见下面diffusion的部分</p>
+</blockquote>
+<h2 id="3diffusion训练部分"><a class="markdownIt-Anchor" href="#3diffusion训练部分"></a> （3）Diffusion训练部分</h2>
+<h3 id="条件嵌入模型-mugcond"><a class="markdownIt-Anchor" href="#条件嵌入模型-mugcond"></a> 条件嵌入模型 [mug/cond]</h3>
+<p><code>mug/cond</code>这个文件夹里实现的都是条件编码模型，即将谱面的特征提示信息和音频信息一起编码，然后输入Diffusion模型的去噪过程，用来控制输出结果的条件向量。</p>
+<blockquote>
+<p>特征输入：特征定义在符合yaml格式的文本上，里面的信息包括如 难度sr，long note比例，键形特征等，训练时特征存储在数据集的database里，推理是可以手动输入，或是从一张想要参考的谱面中提取出来</p>
+<p>音频输入：通过频谱变换离散化后的音频数据，有多种处理方式</p>
+<p>noise level：[不知道这个是在哪里被嵌入的……]</p>
+</blockquote>
+<h4 id="feature_condpy-beatmapfeatureembedder-谱面特征提示嵌入"><a class="markdownIt-Anchor" href="#feature_condpy-beatmapfeatureembedder-谱面特征提示嵌入"></a> feature_cond.py - BeatmapFeatureEmbedder 谱面特征（提示）嵌入</h4>
+<p>主要模型为<code>BeatmapFeatureEmbedder</code>的类，该类继承自<code>torch.nn.Module</code>，用于实现特征编码和嵌入。</p>
+<p>这里嵌入的特征是谱面元数据，即<code>configs/mug/mania_beatmap_features.yaml</code>中定义的特征。该文件路径需要作为参数传入的构造函数中。<br />
+读入<code>mania_beatmap_features.yaml</code>文件的信息后，会使用<code>mug/util.py</code>中的<code>count_beatmap_features</code>函数，计算每个特征需要在嵌入向量中用几个值来表示，例如，一个bool类型的特征需要3个值（表示True/False或者没有这个特征）。<br />
+使用<code> torch.nn.Embedding</code>创建一个嵌入层<code>self.embedding</code>，其维度为传入的参数的<code>embed_dim</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, path_to_yaml, embed_dim</span>):</span><br><span class="line">    <span class="built_in">super</span>().__init__()</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(path_to_yaml) <span class="keyword">as</span> f:</span><br><span class="line">        self.feature_dicts = yaml.safe_load(f)</span><br><span class="line">    self.embedding = torch.nn.Embedding(count_beatmap_features(self.feature_dicts), embed_dim)</span><br></pre></td></tr></table></figure>
+<p><code>forward</code>方法是模型的前向传播过程。它接收一个输入<code>x</code>，将其转换为长整型，然后通过嵌入层进行转换。最后，使用<code>rearrange</code>函数调整张量的维度顺序。<br />
+pattern解释： 输入时二维向量，其形状为[B, F]，其中B代表批次大小，F代表特征数量。<br />
+经过嵌入层后，输出的形状为[B, F, H]，其中H代表嵌入向量的维度，即参数<code>embed_dim</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">    x = rearrange(self.embedding(x.long()), <span class="string">&quot;b f h -&gt; b h f&quot;</span>) <span class="comment"># [B, H, F]</span></span><br><span class="line">    <span class="keyword">return</span> x</span><br></pre></td></tr></table></figure>
+<p><code>summary</code>方法使用<code>torchsummary</code>库的<code>summary</code>函数，打印出模型的概要信息，包括输出大小、参数数量、内核大小等。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">summary</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">import</span> torchsummary</span><br><span class="line">    torchsummary.summary(self, input_data=[<span class="number">5</span>, ],</span><br><span class="line">                         dtypes=[torch.long],</span><br><span class="line">                         col_names=(<span class="string">&quot;output_size&quot;</span>, <span class="string">&quot;num_params&quot;</span>, <span class="string">&quot;kernel_size&quot;</span>),</span><br><span class="line">                         depth=<span class="number">10</span>, device=torch.device(<span class="string">&quot;cpu&quot;</span>))</span><br></pre></td></tr></table></figure>
+<p>测试：输入一个特征配置文件，打印出模型的概要信息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    BeatmapFeatureEmbedder(path_to_yaml=<span class="string">&quot;configs/mug/mania_beatmap_features.yaml&quot;</span>,</span><br><span class="line">                           embed_dim=<span class="number">128</span>).summary()</span><br></pre></td></tr></table></figure>
+<h4 id="wavepy"><a class="markdownIt-Anchor" href="#wavepy"></a> <a target="_blank" rel="noopener" href="http://wave.py">wave.py</a> - 音频数据嵌入</h4>
+<ul>
+<li>这里定义了<code>STFTEncoder</code>，<code>MelspectrogramEncoder</code>等模型，主要实现将音频信息编码为嵌入向量
+<ul>
+<li>STFTEncoder类是一个音频编码器，使用了短时傅里叶变换（STFT）进行音频编码。</li>
+<li>MelspectrogramEncoder和MelspectrogramEncoder1D类是另外两种音频编码器，使用了梅尔频谱图（Melspectrogram）进行音频编码。</li>
+<li>S4BidirectionalLayer类是一个双向S4模型层，它包含了一个归一化层和一个双向S4模型。</li>
+<li>TimingDecoder类是一个解码器，它用于将编码后的音频数据解码回原始数据</li>
+<li>MelspectrogramScaleEncoder1D类是一个一维的梅尔频谱图编码器，它使用了注意力机制进行音频编码。</li>
+</ul>
+</li>
+</ul>
+<p>实际模型训练时，通过指定yaml配置文件中的<code>wave_stage_config</code>字段选择音频编码模型。<br />
+在已知的两种的配置中，编码音频分别使用了<code>STFTEncoder</code>和<code>MelspectrogramScaleEncoder1D</code>模型，分别对应配置文件<code>mug_diffusion_stft.yaml</code><br />
+和<code>mug_diffusion.yaml</code></p>
+<h3 id="ldmddpm模型-mugdiffusion"><a class="markdownIt-Anchor" href="#ldmddpm模型-mugdiffusion"></a> LDM/DDPM模型 - [mug/diffusion]</h3>
+<p>模型训练使用的是Pytorch-Lightning框架，这是一个pytorch深度神经网络api的抽象和包装。它的好处是可复用性强，易维护，逻辑清晰等。</p>
+<p>主要的代码结构(本项目主要在mug目录下)：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-mug/</span><br><span class="line">    |-data/</span><br><span class="line">        |-... 数据集的中间接口</span><br><span class="line">    |-model/</span><br><span class="line">        |-... 模型的中间接口</span><br><span class="line">    -lr_scheduler.py</span><br><span class="line">    -util.py</span><br><span class="line">-main.py 定义命令行参数，实例化数据集、模型、Trainer，开始训练</span><br></pre></td></tr></table></figure>
+<h4 id="diffusionpy"><a class="markdownIt-Anchor" href="#diffusionpy"></a> <a target="_blank" rel="noopener" href="http://diffusion.py">diffusion.py</a> - DDPM模型</h4>
+<p><code>mug/diffusion/diffusion.py</code>是扩散模型的核心文件，根据DDPM论文的方法实现了整个框架模型，因此类名也叫DDPM：</p>
+<p>DDPM继承了<code>pl.LightningModule</code>类。一个继承了<code>pl.LightningModule</code>的类被称为Lightning Module，需要实现以下三个核心的组件：</p>
+<ul>
+<li>1 模型：<code>self.model</code>，训练用的模型网络，可嵌套<code>torch.nn.Module</code>类型</li>
+<li>2 优化器：实现<code>configure_optimizers()</code>函数，其返回值可以是一个优化器或数个优化器，又或是两个List（优化器，Scheduler）</li>
+<li>3 训练步骤：实现以下函数：
+<ul>
+<li><code>forward()</code>函数，定义前向转播过程，返回如何计算损失，这是用来做梯度下降的</li>
+<li><code>training_step()</code>函数，这个函数其实是包装了一个pytorch的训练过程（就是一个for循环，如果你学过基础的pytorch神经网络实现的话）<br />
+其接收一个batch的来自训练数据集的数据，然后，通常这个函数会调用类自身（<code>self(batch)</code>），来通过已定义的模型对整个批量进行一步推理，<br />
+然后根据<code>forward()</code>中的定义计算loss损失。
+<ul>
+<li>需要返回一个字典，包含<code>loss</code>和<code>log</code>两个字段。<code>loss</code>返回损失，<code>log</code>则是可选的，记录一些需要记录的信息，<code>loss</code>字段一定要存在，<br />
+否则pytorch lightning会认为此batch是无效的，从而被跳过训练部分。</li>
+</ul>
+</li>
+<li><code>validation_step()</code>函数：[可选]。功能和<code>training_step()</code>函数一样，不过是在验证过程中调用的，不会去更新模型的权重，只输出log信息，<br />
+主要是给你一个工具，用来自定义输出验证过程中要观察的变量的。</li>
+<li><code>training_epoch_end()</code>函数：[可选]。这个函数是在每个epoch结束时调用的，用于记录一些信息，比如训练集的平均损失等。</li>
+</ul>
+</li>
+</ul>
+<p>回到DDPM类本身，在定义模型时，使用的语句是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mug/diffusion/diffusion.py</span></span><br><span class="line">self.model = MugDiffusionWrapper(unet_config, first_stage_config, wave_stage_config, cond_stage_config)</span><br></pre></td></tr></table></figure>
+<p>这里，额外定义了一个<code>MugDiffusionWrapper</code>类，用来包装MuG Diffusion模型中包含的四个子模型，分别是：</p>
+<ul>
+<li>cond_stage_model：前文所述的<code>BeatmapFeatureEmbedder</code>模型，用来得到【谱面提示】的压缩表示（由可读数据压缩到向量）
+<ul>
+<li>谱面数据包含 osu的谱面元数据（难度等）和 通过minacalc计算得到的谱面提示（各个键形的分布、键形难度等），<em>不包含note数据</em></li>
+</ul>
+</li>
+<li>wave_model：前文所述的<code>STFTEncoder</code>或<code>MelspectrogramScaleEncoder1D</code>模型，用来编码和解码【音频波形】（由音频数据到条件向量？）</li>
+<li>first_stage_model：前文所述的<code>AutoEncoderKL</code>模型，用来编码和解码 【谱面note数据】（从 向量 编码到 潜空间向量 和 从 潜空间向量 解码）</li>
+<li>unet_model：与Stable Diffusion类似的U-Net结构，用来学习反向扩散去噪（Denosing）的步骤
+<ul>
+<li>即，unet_model接受潜空间的两种输入：1、【潜空间的谱面向量数据】2、【条件嵌入向量，包括音频和谱面特征（即“提示 prompt”）】，<br />
+通过多步扩散迭代，学习正向扩散参数，或是反向扩散输新的谱面向量表示。
+<ul>
+<li>在训练时，unet_model的输入是一个【训练数据集的谱面潜空间向量】和【该谱面对应的音频向量、提示向量】，输出是一个【潜空间向量】，<br />
+每一次迭代，都会使得【潜空间向量】接近于从高斯分布采样的【噪声数据】，并同时更新网络权重</li>
+<li>在推理生成新谱面时，unet_model的输入是一个【从高斯分布种采样的噪声谱面向量】和【用户想要的谱面音频和特征的输入向量】，通过多次反向扩散，<br />
+得到生成的【谱面潜空间向量】，通过first_stage_model解码得到可读的【谱面note数据】</li>
+<li>
+<blockquote>
+<p>每个模型的详细结构在下一个小节描述</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>对比：Stable Diffusion（v1）的模型模块和 MuG Diffusion的模型模块</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>输入编码器（条件嵌入）</th>
+<th>潜空间扩散网络</th>
+<th>输出解码器</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stable Diffusion</td>
+<td>基于 CLIP 模型的文本编码器</td>
+<td>U-Net</td>
+<td>AutoEncoder（图像）</td>
+</tr>
+<tr>
+<td>MuG Diffusion</td>
+<td>基于STFT/Mel的音频编码器 + 谱面提示嵌入</td>
+<td>U-Net（魔改）</td>
+<td>AutoEncoder（谱面Note）</td>
+</tr>
+</tbody>
+</table>
+<p>DDPM使用的优化器是<code>AdamW</code>，如果yaml配置文件中定义了学习率调度器，还会使用Pytorch的<code>LambdaLR</code>创建一个学习了调度器。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mug/diffusion/diffusion.py</span></span><br><span class="line">opt = torch.optim.AdamW(params, lr=lr)</span><br><span class="line">...</span><br><span class="line"><span class="keyword">if</span> self.use_scheduler:</span><br><span class="line">    <span class="keyword">assert</span> <span class="string">&#x27;target&#x27;</span> <span class="keyword">in</span> self.scheduler_config</span><br><span class="line">    scheduler = instantiate_from_config(self.scheduler_config)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在MuG Diffusion的两种配置文件里，<code>mug_diffusion.yaml</code>中定义了学习率调度器为Stable Diffusion使用的<br />
+<code>ldm.lr_scheduler.LambdaLinearScheduler</code>，而<code>mug_diffusion_stft.yaml</code>中没有定义学习率调度器</p>
+</blockquote>
+<h4 id="unetpy"><a class="markdownIt-Anchor" href="#unetpy"></a> <a target="_blank" rel="noopener" href="http://unet.py">unet.py</a> - U-Net模型</h4>
+<p><code>mug/diffusion/unet.py</code>中定义了U-Net模型，这个模型是DDPM的核心，用于进行潜空间的扩散和反向扩散。</p>
+<p>wave_model、cond_stage_model和first_stage_model（即VAE）的输出都将作为U-Net的输入，下面从模型输入和输出的shape简要描述一下模型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mug/diffusion/diffusion.py</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x, t, c, w</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        x 对应 UNetModel 的 x 参数，表示输入的特征张量。</span></span><br><span class="line"><span class="string">        t 对应 UNetModel 的 timesteps 参数，表示时间步长。</span></span><br><span class="line"><span class="string">        c 对应 UNetModel 的 context 参数，表示上下文信息[谱面提示]，用于条件生成</span></span><br><span class="line"><span class="string">        *w 对应 UNetModel 的 *audios 参数，表示音频数据，用于音频处理</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">return</span> self.unet_model(x, t, c, *w)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>整个网络的结构遵循UNet的典型编码器-解码器结构，通过逐渐增加和减少特征图的尺寸来学习丰富的特征表示，最终输出与输入相同尺寸的张量。<br />
+U-Net模仿了Stable Diffusion中的U-Net结构，包括注意力层等，但是做了一些改动，主要是为了适应【音频数据具有天然的时序性】。</p>
+<blockquote>
+<p>Stable Diffusion U-Net的结构参见（图源水印）：<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic3.zhimg.com/v2-1a60fadfd1b8cb1b41bad5f7deddf526_r.jpg"/></div></div></p>
+</blockquote>
+<p>因此，U-Net模型中可以选择加入下面的部分来增强模型处理序列数据的能力。</p>
+<ul>
+<li>LSTM层，使用LSTM模型处理时序信息，这也是参考已有生成谱面的工作，大多采用了LSTM块来设计网络。</li>
+<li>S4层：使用Structured State Space（S4）模型，是一种基于状态空间模型（SSM）的新型序列建模方法。它本质上是连续时间的，并且在建模数据中的长期依赖性方面表现出色。</li>
+</ul>
+<p>模型结构流程描述：</p>
+<ul>
+<li>[ i ] 首先进行一个卷积，将输入张量数据（谱面note数据）的通道数转换为<code>model_channels</code><br />
+（<code>model_channels</code>是配置文件中定义的参数(128)，代表模型的通道数）。</li>
+<li>[ ii ] Downstamps（input_blocks） 下采样:&quot;U“形状的左半边，每次通过两个网络模块：
+<ul>
+<li>
+<p>1、<code>AudioConcatBlock</code>，将当前分辨率等级的音频通道数<em>直接加到</em>到模型的通道数中，并连接音频数据和输入数据。<br />
+音频通道数对于不同的采样分辨率分别是[256,512,512,512]</p>
+</li>
+<li>
+<p>2、一个ResBlock（残差块），其中包含三层：</p>
+<ul>
+<li>第一 <code>TimestepResBlock</code>，和Stable Diffusion的方法一样，将时间步数据嵌入到残差块中（没细看，不知道这里有没有魔改……</li>
+<li>第二 <code>ContextualTransformer</code>（自定义注意力层），</li>
+<li>第三：按照配置中的指定，在注意力层中后面<strong>额外添加一个LSTM层或S4层</strong>。</li>
+</ul>
+</li>
+<li>
+<p>每个<code>TimestepResBlock</code>都会从外部连接一个timestep_emb，作为时间信息的编码。这里采用了和Stable Diffusion一样的策略，<br />
+timestep_emb的长度为<code>model_channels</code>的4倍。</p>
+</li>
+<li>
+<p>每个<code>ContextualTransformer</code>层都会从外部连接一个相同的context张量，这个就是之前传入的c，从BeatmapFeatureEmbedder获得的谱面特征提示数据</p>
+<blockquote>
+<p>在原版Stable Diffusion里，注意力块名称是SpatialTransformer，因为生成图像的文本提示contex是不定长的，而这里生成谱面的提示是定长的，<br />
+且不需要进行2D卷积。因此这里重新写了一个ContextualTransformer，二者都是从BasicTransformerBlock继承而来。</p>
+</blockquote>
+</li>
+<li>
+<p>每次通过完整的input_block以后，进行一次下采样，倍增模型的通道数（按照配置，倍率为[ 1,2,4,4 ]），压缩数据的维度和注意力层的分辨率</p>
+</li>
+</ul>
+</li>
+<li>[ iii ] middle_block: &quot;U&quot;形状的底部，也是模型的中间层，与Stable Diffusion的结构仍然相同，通过了一个三明治形状的<code>TimestepResBlock</code>-<code>ContextualTransformer</code>-<code>TimestepResBlock</code>网络块。</li>
+<li>[ iv ] Upstamps（output_blocks） 上采样：&quot;U&quot;形状的右半边，老样子，与下采样相反即可，每次通过相同的<code>TimestepResBlock</code>-<code>ContextualTransformer</code>-<code>LSTM/S4</code>层后进行一次上采样。</li>
+<li>[ v ] 输出层：上采样结果先通过一个归一化层和一个SiLU激活函数，然后最后通过一个卷积层将特征映射到目标输出通道数，over。
+<blockquote>
+<p>好奇：这里和原版SD一样，用了个<code>zero_module</code>来初始化卷积层，不知是什么优化技巧……</p>
+</blockquote>
+</li>
+</ul>
+<p>各个模型的input size和Output size：</p>
+<blockquote>
+<p>下表默认省略了batch size，即应该添加在各个input size前面的批量维度B</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>Input size</th>
+<th>Output size</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(VAE)Encoder</td>
+<td>(16, 4096)</td>
+<td>(64, 128)</td>
+<td>16是谱面note数据的输入通道数，它是由“4K”按键的四个位置，每个位置分配4个通道构成的。<br/>经过多次下采样后得到形状256*128，然后通过卷积压缩到潜空间的形状为64*128</td>
+</tr>
+<tr>
+<td>(VAE)Decoder</td>
+<td>(64, 128)</td>
+<td>(16, 4096)</td>
+<td>与上面相反，多次上采样后得到形状64*4096,  然后通过卷积恢复到谱面形状16*4096</td>
+</tr>
+<tr>
+<td>BeatmapFeatureEmbedder</td>
+<td>(f)</td>
+<td>(f, 128)</td>
+<td>f是feature的数量？（数据集中一个谱面的feature长度为21）</td>
+</tr>
+<tr>
+<td>MelspectrogramScaleEncoder1D</td>
+<td>(128, 32768)</td>
+<td>(512, 64)</td>
+<td>32768代表最大的序列长度（梅尔频谱图的长度），和下面的傅里叶变换相比，是将两个音频通道混合到一起，数量*2</td>
+</tr>
+<tr>
+<td>STFTEncoder</td>
+<td>(2, 1025, 16384)</td>
+<td>(32, 256)</td>
+<td>2=输入通数道（对应复数的实部和虚部），1025=频率分辨率，16384=最大的序列长度，输出形状中的32是输出通道数</td>
+</tr>
+<tr>
+<td>U-Net(使用STFT)</td>
+<td>(544, 4096)</td>
+<td>(32, 4096)</td>
+<td>在这个方法中，音频通道和输入通道（32）一开始就通过直接连接合并到一起，544 = 512+32 (我也不知道为什么使用STFT的通道数多一倍，对不起我没学过信号处理QAQ)</td>
+</tr>
+<tr>
+<td>U-Net(使用MelScaleEncoder1D)</td>
+<td>(16, 4096)</td>
+<td>(16, 4096)</td>
+<td>x是从噪声分布中采样的，与谱面note数据形状相同的随机输入。 而提示数据、时间步数据和音频数据都是从外部嵌入的。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ddimpy"><a class="markdownIt-Anchor" href="#ddimpy"></a> <a target="_blank" rel="noopener" href="http://ddim.py">ddim.py</a> - DDIM模型</h4>
+<p>DDIM是DDPM的一个改进模型，用于推理时快速采样x，貌似训练时没有用到。</p>
+<h3 id="训练入口mainpy"><a class="markdownIt-Anchor" href="#训练入口mainpy"></a> 训练入口[<a target="_blank" rel="noopener" href="http://main.py">main.py</a>]</h3>
+<ul>
+<li>加载模型：<code>model = instantiate_from_config(config.model)</code>,config里配置的模型即为DDPM模型</li>
+<li>加载数据：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data = instantiate_from_config(config.data)</span><br><span class="line">data.prepare_data()</span><br><span class="line">data.setup()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;#### Data #####&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> data.datasets:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;k&#125;</span>, <span class="subst">&#123;data.datasets[k].__class__.__name__&#125;</span>, <span class="subst">&#123;<span class="built_in">len</span>(data.datasets[k])&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>开始训练，使用<code>trainer.fit()</code>函数，传入模型和数据集</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> opt.train:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        trainer.fit(model, data)</span><br><span class="line">    <span class="keyword">except</span> Exception:</span><br><span class="line">        melk()</span><br><span class="line">        <span class="keyword">raise</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> opt.no_test <span class="keyword">and</span> <span class="keyword">not</span> trainer.interrupted:</span><br><span class="line">    trainer.test(model, data)</span><br></pre></td></tr></table></figure>
+<h2 id="4webui和推理部分"><a class="markdownIt-Anchor" href="#4webui和推理部分"></a> （4）WebUI和推理部分</h2>
+<h3 id="交互式推理入口webuipy"><a class="markdownIt-Anchor" href="#交互式推理入口webuipy"></a> 交互式推理入口[<a target="_blank" rel="noopener" href="http://webui.py">webui.py</a>]</h3>
+<blockquote>
+<p>TODO</p>
+</blockquote>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/12/19/%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80%E4%B8%8E%E5%BA%94%E7%94%A8%E7%AC%94%E8%AE%B0-%E7%AC%AC4%E7%AB%A0/">生成模型基础与应用笔记-第4章</a></div></section></div>
+
+
+
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body waline'>
+      
+
+<div id="waline_container" class="waline_thread"><svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg></div>
+
+    </section>
+  </div>
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br />
+本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"codeblock":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function load_comment(){
+    if(!document.getElementById("waline_container"))return;
+    stellar.loadCSS('https://unpkg.com/@waline/client@2.14.1/dist/waline.css');
+    stellar.loadScript('https://unpkg.com/@waline/client@2.14.1/dist/waline.js', {defer:true}).then(function () {
+      const el = document.getElementById("waline_container");
+      var path = el.getAttribute('comment_id');
+      if (!path) {
+        path = decodeURI(window.location.pathname);
+      }
+      Waline.init(Object.assign({"js":"https://unpkg.com/@waline/client@2.14.1/dist/waline.js","css":"https://unpkg.com/@waline/client@2.14.1/dist/waline.css","serverURL":"https://www.nicenick.live","commentCount":true,"pageview":true,"emoji":["https://unpkg.com/@waline/emojis@1.1.0/bilibili"]}, {
+        el: '#waline_container',
+        path: path,
+        
+      }));
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');
+    load_comment();
+  });
+
+</script>
+
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
