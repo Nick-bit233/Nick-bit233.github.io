@@ -6,7 +6,7 @@ tags:
 
 > 注意，本篇基于langchain官方文档编写，众所周知LangChain的更新频率很高，因此本文不保证具有时效性
 > 
-> 最后更新时间：2024-01-23， LangChain版本0.1.2
+> 最后更新时间：2024-02-03， LangChain版本0.1.2
 
 ## LangChain基础：使用链和LLM对话
 ### 安装langchain
@@ -1929,3 +1929,5 @@ agent = create_agent_method(llm, tools, prompt)
 ```
 #### Langchain内置工具包
 **所有内置工具包的使用文档：**[https://python.langchain.com/docs/integrations/toolkits](https://python.langchain.com/docs/integrations/toolkits)
+
+### COT TOT 和 思维图的实现
