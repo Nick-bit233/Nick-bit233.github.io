@@ -25,9 +25,9 @@ title: 关于
 {% psw 什么？！居然一篇论文也没有？！！%} {% psw 天哪我怎么这么菜 %}
 
 ## 一些个人主页
-- Github：{% tag #Nick-bit233 https://github.com/Nick-bit233 color:orange %}
-- bilibili：{% tag @赛因斯没有坦 https://space.bilibili.com/87703903 color:blue %}
-- Steam：{% tag @Nick_bit https://steamcommunity.com/id/Nick_bit color:black %}
+- Github：{% hashtag #Nick-bit233 https://github.com/Nick-bit233 color:orange %}
+- bilibili：{% hashtag @赛因斯没有坦 https://space.bilibili.com/87703903 color:blue %}
+- Steam：{% hashtag @Nick_bit https://steamcommunity.com/id/Nick_bit color:black %}
 
 ## 做过的一些有意思的东西
 
@@ -38,11 +38,11 @@ title: 关于
 
 | Game | Ranking | Last Update Date |
 | --- | --- | --- |
-| Arcaea | 11.78 | 23/12/04 |
-| Lanota | 15.80 | 23/12/04 |
-| Chunithm（CN）| 14.68 | 23/12/01 |
-| maimaiDX（CN）| 11746 | 23/12/01 |
-| Phigros | 14.61 | 23/12/04 |
+| Arcaea | 12.01 | 24/12/29 |
+| Lanota | 16.05 | 24/12/29 |
+| Chunithm（CN）| 15.37 | 24/12/29 |
+| maimaiDX（CN）| 14100 | 24/12/29 |
+| Phigros | 15.01 | 24/02/12 |
 | osu! Standard | 803pp | 22/08 |
 
 ## 有用的网站收藏夹

@@ -22,9 +22,9 @@ tags:
 （如果游戏名后面带有*的，说明这并非是今年发售的游戏）
 
 ### Alan Wake 2 *
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735363504542-f2853e07-cfc3-41e9-ad61-882d72476020.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735363504542-f2853e07-cfc3-41e9-ad61-882d72476020.png width:648px fancybox:false %}
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735366429592-6ac45405-d8dd-4c6d-978d-c238da11e7c9.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735366429592-6ac45405-d8dd-4c6d-978d-c238da11e7c9.png width:648px fancybox:false %}
 
 + 发行时间：2023年10月
 + 体验时间：1月
@@ -35,7 +35,7 @@ tags:
 {% audio netease:2094352413 %}
 
 ### 幻兽帕鲁
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735367243562-eb1177a7-9e99-4067-a3bc-2b0275cca381.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735367243562-eb1177a7-9e99-4067-a3bc-2b0275cca381.png width:648px fancybox:false %}
 
 + 发行时间：1月
 + 体验时间：1月-2月
@@ -44,9 +44,9 @@ tags:
 今年的除夕夜推荐游戏！可能到年底了你们已经忘了小帕鲁在年初有多火了吧（doge），表面上是缝合怪，内心上是家里人。幻兽帕鲁其实是一个完成度很高的游戏，更不要说一直到年底都还在更新新内容了。我有空会想回到这个家园再看一看的。
 
 ### Balatro（小丑牌）
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735367524101-bdab95b9-b901-4330-b028-4ff6a1546389.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735367524101-bdab95b9-b901-4330-b028-4ff6a1546389.png width:648px fancybox:false %}
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735367545120-427a64f6-f31b-4d13-8853-7490aa81d4ec.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735367545120-427a64f6-f31b-4d13-8853-7490aa81d4ec.png width:648px fancybox:false %}
 
 + 发行时间：2月
 + 体验时间：2月-3月
@@ -55,7 +55,7 @@ tags:
 同样是今年爆火，并且得奖无数的游戏，但是我要狠狠地泼一盆冷水。在我看来，小丑牌的优点只有精心设计的UI动效。它本质上脱离不开靠低运气获得精神刺激的博弈游戏（对说的就是你，德州扑克），靠和抽卡游戏一样的思路吸引到了大批轻量级玩家罢了。整个游戏没有体现出深度和肉鸽设计，诸如没有局外成长，策略迭代等等，加高难度也就只是降低胡的概率。最后，这个很有潜力的框架居然一直没有卡牌和玩法模式更新，好不容易联动了一次却只换来了扑克皮肤。**看得出来作者一定是四处拉奖去了，没有好好考虑迭代玩法吧（doge）**，以至于后半年类小丑牌的玩法已经有遍地开花的势头了，希望在这些后继作品中能看到真正让我欣赏的好玩意。至于小丑牌，我只能说游戏还不错，年度？还是算了吧。
 
 ### 背包乱斗：福西法的宝藏 （EA版本）
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735368180088-dfe76aa1-7bf8-4833-afb6-0fc585e37e4b.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735368180088-dfe76aa1-7bf8-4833-afb6-0fc585e37e4b.png width:648px fancybox:false %}
 
 + 发行时间：3月
 + 体验时间：3月-4月
@@ -64,7 +64,7 @@ tags:
 作为同样在社交媒体爆火的游戏，小丑牌你看看人家啊，勤勤恳恳地更新了一整年，平衡性也调整了，新物品一直出，对战大厅也有了。虽然说背包乱斗以体量和创新来说，也还没有把玩法打磨到大师级完美这样的程度，但是作为pvp博弈的竞技游戏，已经做的很好了。不带着太强的胜负欲去玩，合成大物品的一刻仍然是超有成就感的（参考上图的彩虹黏黏233），希望后续还能有更让人惊讶的更新。
 
 ### 神之天平外传：幻雾之洞窟
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735368511020-8d1e0dfe-5256-4ff8-b948-11b19d549af8.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735368511020-8d1e0dfe-5256-4ff8-b948-11b19d549af8.png width:648px fancybox:false %}
 
 + 发行时间：3月
 + 体验时间：3月
@@ -73,9 +73,9 @@ tags:
 神作之DLC，没有了正传中强引导的剧情，外传客观上来说确实是单薄了不少，刷刷刷的玩法也很容易玩腻，可能都到达不了最终的结局。但是我的个人感受，这套玩法并非不可接受。外传相当于是完全强调了kezio的这套传承JRPG经典的成长玩法体系。不用像正传一样被剧情限制，可以充分地丰富的迭代数值、招式、道具。而且各个维度算得上环环相扣，是让玩家有全收集动力的设计，而不是收集环节看着像捡垃圾。因此，神之天平外传依然是非常不错的DLC佳作。
 
 ### 闪避刺客 SANABI *
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735368974524-f7e04c15-77f7-44c2-b946-b6ea68dd0e33.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735368974524-f7e04c15-77f7-44c2-b946-b6ea68dd0e33.png width:648px fancybox:false %}
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735368995505-e6b5c9a1-5a4e-4291-9dc4-5c315eeeb7de.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735368995505-e6b5c9a1-5a4e-4291-9dc4-5c315eeeb7de.png width:648px fancybox:false %}
 
 + 发行时间：2023年11月
 + 体验时间：3月
@@ -86,7 +86,7 @@ tags:
 {% audio netease:2117757995 %}
 
 ### 吸血鬼幸存者 *
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735369377505-3ad4015b-ae74-4f44-be70-772f1192102d.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735369377505-3ad4015b-ae74-4f44-be70-772f1192102d.png width:648px fancybox:false %}
 
 + 发行时间：2022年10月
 + 体验时间：3月- 4月
@@ -95,9 +95,9 @@ tags:
 这是春促的时候购买的，有句话怎么说的来着？曾经沧海难为水。玩过开山鼻祖之后，再去看现在遍地开花的类吸血鬼幸存者游戏，会有一种去魅的感觉吧。
 
 ### 恶意不息 NO REST FOR THE WICKED（EA版本）
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735369732925-f2034dff-97e4-4c82-889d-f1778bfd5178.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735369732925-f2034dff-97e4-4c82-889d-f1778bfd5178.png width:648px fancybox:false %}
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735369750806-1d2dc45e-4578-4496-96c5-a47486d82487.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735369750806-1d2dc45e-4578-4496-96c5-a47486d82487.png width:648px fancybox:false %}
 
 + 发行时间：4月
 + 体验时间：4月
@@ -108,7 +108,7 @@ tags:
 但是，我是真的，真的，真的很喜欢Moon Studio的场景美术。以至于翻出这两张截图的时候，脑子里又梦回了那个月的晚上畅游奇幻世界的时候。虽然现在最多只能给个8，我依然秉持着恶意不息是个好的游戏底子，希望月亮工作室的完整版能憋个大的。
 
 ### Patrick's Parabox * 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735369987506-f5826515-4401-4cdf-af0d-27046f04b131.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735369987506-f5826515-4401-4cdf-af0d-27046f04b131.png width:648px fancybox:false %}
 
 + 发行时间：2022年3月
 + 体验时间：4月 / 9月
@@ -117,9 +117,9 @@ tags:
 今年很多时间都用来补一些独立解谜的经典作品了，潘~~多拉盒子~~，不是，帕特里克的盒子就是其中之一，利用无穷迭代的空间悖论来解推箱子，难度下可消遣，上可登天。轻松愉快，锻炼思维能力，是和Baba is you一样的必玩作品。
 
 ### Hades II （EA版本）
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735370200231-f30fd49f-c5a5-4dca-90db-2d5644d9b8e4.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735370200231-f30fd49f-c5a5-4dca-90db-2d5644d9b8e4.png width:648px fancybox:false %}
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735370186391-f86cafe0-099e-4a83-b91a-94b317a1f154.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735370186391-f86cafe0-099e-4a83-b91a-94b317a1f154.png width:648px fancybox:false %}
 
 + 发行时间：5月
 + 体验时间：5月 
@@ -129,7 +129,7 @@ tags:
 
 ### Animal Well
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735370591424-7e1a44ba-ce94-4425-a1d1-de4e1e776e13.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735370591424-7e1a44ba-ce94-4425-a1d1-de4e1e776e13.png width:648px fancybox:false %}
 
 + 发行时间：5月
 + 体验时间：5月 - 6月 
@@ -150,7 +150,7 @@ tags:
 关于动物井的深入思考，总归涉及到一些游戏剧透，也许会在另一篇文章中详述（如果它能在年前写完的话（
 
 ### 点老救世记 dotAGE *
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735371285894-39f9e8d8-2326-4d3f-83c7-013c18fd46c5.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735371285894-39f9e8d8-2326-4d3f-83c7-013c18fd46c5.png width:648px fancybox:false %}
 
 + 发行时间：2023年10月
 + 体验时间：6月 - 7月 
@@ -164,7 +164,7 @@ tags:
 >
 
 ### Rabi-Ribi *
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735371613279-81acf360-cf34-461a-a40a-1a3a1a464486.png "ob一串字母女士：想啊，让我忘记一切吧（还在go）" width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735371613279-81acf360-cf34-461a-a40a-1a3a1a464486.png "ob一串字母女士：想啊，让我忘记一切吧（还在go）" width:648px fancybox:false %}
 
 + 发行时间：2016年1月
 + 体验时间：7月
@@ -177,9 +177,9 @@ tags:
 {% audio netease:404182711 %}
 
 ### 粘粘世界2
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735461815947-1d98edca-d4d2-4e4f-b9b3-c3d5730b03cb.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735461815947-1d98edca-d4d2-4e4f-b9b3-c3d5730b03cb.png width:648px fancybox:false %}
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735461713393-244de047-1551-4b48-ae5f-59fcd4f7e00d.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735461713393-244de047-1551-4b48-ae5f-59fcd4f7e00d.png width:648px fancybox:false %}
 
 + 发行时间：8月
 + 体验时间：8月
@@ -192,11 +192,11 @@ tags:
 {% audio netease:2618992011 %}
 
 ### 黑神话：悟空
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735372591424-86b0dd85-4042-40a7-9b6a-8f052e38d2de.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735372591424-86b0dd85-4042-40a7-9b6a-8f052e38d2de.png width:648px fancybox:false %}
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735372555413-e22621b6-44cc-49a9-967c-04f756bf8218.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735372555413-e22621b6-44cc-49a9-967c-04f756bf8218.png width:648px fancybox:false %}
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735372476790-51802283-cd5f-4ffb-8ed5-231758f04348.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735372476790-51802283-cd5f-4ffb-8ed5-231758f04348.png width:648px fancybox:false %}
 
 + 发行时间：8月
 + 体验时间：8月 
@@ -205,9 +205,9 @@ tags:
 篇幅有限，我只挑了我自认为拍的最好的三张截图。没错，今年的所有游戏里，只有黑神话是让我心甘情愿地在打boss的过程中还打开游戏摄影的~~（等一下，你玩的其他游戏也没几个有摄影模式的啊）~~，我觉得别的无需多言。虽然玩的过程中心态也经历过一些波折，但是咱们确实已经有了真正的电子游戏顶流作品。别看10.9好像还不够高，这可才是起点。
 
 ### 不过如此的去月球系列海滩特别篇
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735373043165-86f92465-0dbd-412b-b68b-56339f0ecb0f.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735373043165-86f92465-0dbd-412b-b68b-56339f0ecb0f.png width:648px fancybox:false %}
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735373054111-929cf05c-d16c-4906-9b80-bc86128e6312.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735373054111-929cf05c-d16c-4906-9b80-bc86128e6312.png width:648px fancybox:false %}
 
 + 发行时间：9月
 + 体验时间：9月 
@@ -220,7 +220,7 @@ tags:
 {% audio netease:2633699900 %}
 
 ### OneShot *
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735372976339-1fc9315a-e626-4431-be39-c6f04447ab40.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735372976339-1fc9315a-e626-4431-be39-c6f04447ab40.png width:648px fancybox:false %}
 
 + 发行时间：2016年
 + 体验时间：10月
@@ -229,9 +229,9 @@ tags:
 最早的一批重meta要素的独立作品，也算是慕名而来。虽然游戏流程很短，画面表现也比较难堪，但是包袱抖出来的时候仍然非常惊人。你要知道那是undertale、这里没有游戏和邪恶铭刻等作品都还没有面世的时代。游戏的剧情和音乐也非常契合，不像很多meta要素的游戏注重解构和戏谑，游戏结束以后还能收获一份感动，看在这个份（以及主角很可爱！）上给与破格1.7的主观得分。
 
 ### Pentiment *
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735373411398-e54fde77-09a0-44d6-9f10-0c9a722a43e0.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735373411398-e54fde77-09a0-44d6-9f10-0c9a722a43e0.png width:648px fancybox:false %}
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735373382378-6a6b3945-b98b-4387-8771-ef2ef69898cd.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735373382378-6a6b3945-b98b-4387-8771-ef2ef69898cd.png width:648px fancybox:false %}
 
 + 发行时间：2022年11月
 + 体验时间：10月
@@ -244,7 +244,7 @@ tags:
 感谢黑曜石，在现在这个时代的游戏里还能读到这样美的文字是一种至福。
 
 ### Braid Anniversary Edition
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735373927027-ab500ea9-ffeb-4e2f-bfb7-5df89b6f99c6.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735373927027-ab500ea9-ffeb-4e2f-bfb7-5df89b6f99c6.png width:648px fancybox:false %}
 
 + 发行时间：5月
 + 体验时间：12月
@@ -257,9 +257,9 @@ tags:
 哈哈哈，开个玩笑，早期作品是优缺点明显的。异常精巧的谜题设计和不友好的操作手感以及引导，Braid就是这样一个挺矛盾的作品，也许我会把它和一些比较疯魔的解谜作品放在一起（比如某个香肠卷）。不过我觉得吹哥应该也和以前的自己达成了和解，这部分去听一听开发者音频，我想你也会明白的。
 
 ### Tunic *
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735374811382-9a2a93df-a086-419f-bd67-0e69b6f630ec.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735374811382-9a2a93df-a086-419f-bd67-0e69b6f630ec.png width:648px fancybox:false %}
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735374883624-feec7696-d88c-4af4-a482-8f0a8f3d25d2.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735374883624-feec7696-d88c-4af4-a482-8f0a8f3d25d2.png width:648px fancybox:false %}
 
 + 行时间：2022年3月
 + 体验时间：12月
@@ -279,7 +279,7 @@ Tunic基本符合这类冒险解谜游戏的精髓：表面上一个设计精巧
 >
 
 ### Raft *
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735374288807-4d3af761-cab2-4c6d-ad12-2aeeef253f0b.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735374288807-4d3af761-cab2-4c6d-ad12-2aeeef253f0b.png width:648px fancybox:false %}
 
 + 发行时间：2022年6月
 + 体验时间：1月
@@ -289,7 +289,7 @@ Tunic基本符合这类冒险解谜游戏的精髓：表面上一个设计精巧
 但是后来我退款了，我并不觉得这款游戏能和上面的老游戏坐一桌。至少单人模式是这样的。游戏的引导系统做的并不好，前期资源管理一有失误，就非常容易卡死自己。更痛苦的在于，游戏的基本的存档回档功能也不完善，最后只能进入死循环然后放弃存档。想打个mod提高一下游戏体验，发现很多mod从23年以后就再也没有更新过了，属实有点失望。
 
 ### 恶魔轮盘 Buckshot Roulette 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735369509413-ea39018c-4c27-4953-b6e2-905403a85f85.png width:648px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735369509413-ea39018c-4c27-4953-b6e2-905403a85f85.png width:648px fancybox:false %}
 
 + 发行时间：4月
 + 体验时间：4月
@@ -306,7 +306,7 @@ Tunic基本符合这类冒险解谜游戏的精髓：表面上一个设计精巧
 + 类型：半年番
 + 评分：9（ 8.4 + 1.2 = 9.6 ）
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735463044474-4813278c-a5d1-4348-a914-2a6e1eaad0fb.png width:256px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735463044474-4813278c-a5d1-4348-a914-2a6e1eaad0fb.png width:256px fancybox:false %}
 
 半年番，但是只看了前半年的12集（后面的我会补的（立flag）），也是今年热度口碑双丰收的作品了。看起来非常轻松舒服，有一种玩全新trpg游戏，乐此不疲地翻看世界观说明书的感觉，人设和台词功底也非常深厚，值得推荐（就是为什么我对其中的吃的提不起兴趣捏，也许~~平时吃的还是太好了~~我还是不适合呆在地下城）。
 
@@ -316,7 +316,7 @@ Tunic基本符合这类冒险解谜游戏的精髓：表面上一个设计精巧
 + 补番时间：1月
 + 评分：8（ 7 + 1 = 8 ）
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735463206472-972fa0a5-9e93-42a4-9026-6e7b62de1b18.png width:256px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735463206472-972fa0a5-9e93-42a4-9026-6e7b62de1b18.png width:256px fancybox:false %}
 
 ### 剧场版 BanG Dream! Poppin'Dream *
 + 开播时间：2022.1
@@ -324,7 +324,7 @@ Tunic基本符合这类冒险解谜游戏的精髓：表面上一个设计精巧
 + 补番时间：8月
 + 评分：8+（ 7.2 + 1.5 = 8.7 ）
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735462589169-3766ef79-a6de-438d-80ab-bb7824217b52.png width:256px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735462589169-3766ef79-a6de-438d-80ab-bb7824217b52.png width:256px fancybox:false %}
 
 两部放在一起说，都是邦邦的剧场版，一部冬天看的，一部夏天看的，这下算是补完了邦邦动画的全部内容了。
 
@@ -337,7 +337,7 @@ Tunic基本符合这类冒险解谜游戏的精髓：表面上一个设计精巧
 + 类型：季番
 + 评分：9（ 8.2 + 1 = 9.2 ）
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735463134084-ec77383f-5c8c-4e47-b326-8e2798f0d340.png width:256px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735463134084-ec77383f-5c8c-4e47-b326-8e2798f0d340.png width:256px fancybox:false %}
 
 "强制把观众的情绪拉进来"，对没错你猜我在暗示什么。我们少女乐队企划现在是真的火了啊，居然连四大名著都有了。虽然我是邦邦粉丝，但是也不会因为这个立场就去黑GBC，相反我也要吹一吹这个3D，当时4月那是各大群聊社交媒体铺天盖地的GBC表情包啊，足以见得这个3D制作功底，从Mygo到GBC，似乎终于让3D再次伟大了，我泪目……
 
@@ -348,12 +348,12 @@ Tunic基本符合这类冒险解谜游戏的精髓：表面上一个设计精巧
 + 类型：季番
 + 评分：8（ 7.2 + 1.3 = 8.5 ）
 
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735464912250-2729bc0c-d414-43aa-824f-761e3308edf9.png width:256px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735464912250-2729bc0c-d414-43aa-824f-761e3308edf9.png width:256px fancybox:false %}
 
 好的这是4月番的另一面，押宝失败的结果。我一开始也是非常看好水母的，到了最后只能说非常可惜，我甚至还想过这个结尾三集怎么改可以挽回剧本的口碑……不过现在看来也是无所谓了，到了评选年度的时候，这种级别的缺点，完全不能和放在TGA公式最后的仙人相比呢……总之，我还是很喜欢这部番的人设，以及40mp老师为其撰写的配乐。
 
 ### 魔法少女与邪恶曾经敌对。
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735462683682-c5a07b0b-e62c-455f-8569-b361ac4d54f9.png width:256px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735462683682-c5a07b0b-e62c-455f-8569-b361ac4d54f9.png width:256px fancybox:false %}
 
 + 开播时间：2024.7
 + 类型：季番
@@ -368,7 +368,7 @@ Tunic基本符合这类冒险解谜游戏的精髓：表面上一个设计精巧
 
 ## 影视篇
 ### 周处除三害
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735465379463-58f5476a-f458-4647-8681-2f96ae4f8c1b.png width:256px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735465379463-58f5476a-f458-4647-8681-2f96ae4f8c1b.png width:256px fancybox:false %}
 
 + 开播时间：2023.10(中国台湾) / 2024.03(中国大陆)
 + 观影时间：2024.10
@@ -377,7 +377,7 @@ Tunic基本符合这类冒险解谜游戏的精髓：表面上一个设计精巧
 挺高质量的影片，湾湾蛮会写的嘛，节奏没尿点表演也到位（居然引入大陆大部分都没被删减，也是说明这是真正的艺术了（doge））
 
 ### 宇宙探索编辑部
-{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735465549846-209d38bc-91a8-4cc6-8315-928aca3e3203.png width:256px fancybox:true %}
+{% image https://cdn.nlark.com/yuque/0/2024/png/23169257/1735465549846-209d38bc-91a8-4cc6-8315-928aca3e3203.png width:256px fancybox:false %}
 
 + 开播时间：2023.04.01(中国大陆)
 + 观影时间：2024.11
